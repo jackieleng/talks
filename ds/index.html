@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
+  <title>big</title>
+  <link href='big.css' rel='stylesheet' type='text/css' />
+  <link href='highlight.css' rel='stylesheet' type='text/css' />
+  <style>
+    .new-shiny { background: #aaaaaa; }
+  </style>
+  <script src='big.js'></script>
+  <script src='highlight.js'></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class='light'>
+  <div><p>Datastructuren</p>
+</div>
+<div><p>Doel: organisatie data</p>
+</div>
+<div><p>Abstracte datatypes</p>
+</div>
+<div><blockquote>
+<p>(...) an abstract data type (ADT) is a mathematical model for data types, where a data type is defined by its behavior (semantics) from the point of view of a user of the data, specifically in terms of possible values, possible operations on data of this type, and the behavior of these operations.</p>
+</blockquote>
+<p>Bron: <a href="https://en.wikipedia.org/wiki/Abstract_data_type">https://en.wikipedia.org/wiki/Abstract_data_type</a></p>
+</div>
+<div><ul>
+<li>List</li>
+<li>Queue</li>
+<li>Stack</li>
+<li>Associative array</li>
+</ul>
+</div>
+<div><p>Datastructuren zijn <em>implementaties</em> van ADTs</p>
+</div>
+<div><p>List</p>
+</div>
+<div><p>List implementaties:</p>
+<ul>
+<li><em>Array</em>: blok geheugen alloceren, vaste grootte</li>
+<li><em>Linked list</em>: dynamisch, kan groeien/kleiner worden</li>
+</ul>
+</div>
+<div><p>Linked list</p>
+</div>
+<div><p><img src="Singly-linked-list.svg" alt="Singly linked list" style="width: 250%;"/></p>
+</div>
+<div><pre><code class="lang-js">class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+</code></pre>
+</div>
+<div><pre><code class="lang-js">class SinglyLinkedList {
+  constructor() {}
+  append(data) {}
+  insert(data) {}
+  get(index) {}
+  remove(index) {}
+}
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  constructor() {
+    this.first = null;
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  append(data) {
+    var newNode = new Node(data);
+    if (!this.first) {
+      this.first = newNode;
+    } else {
+      var current = this.first;
+      while (current.next) {
+        current = current.next
+      }
+      current.next = newNode;
+    }
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  insert(data) {
+    var newNode = new Node(data);
+    newNode.next = this.first;
+    this.first = newNode;
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  getNode(index) {
+    if (index &lt; 0 || index &gt; this.length() - 1) {
+      throw new Error(&quot;Index out of bounds.&quot;);
+    }
+    var current = this.first;
+    for (var i = 0; i &lt; index; i++) {
+      current = current.next;
+    }
+    return current;
+  }
+
+  get(index) {
+    return this.getNode(index).data;
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  length() {
+    var count = 0
+    var current = this.first;
+    while (current) {
+      current = current.next;
+      count++;
+    }
+    return count;
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class SinglyLinkedList
+
+  remove(index) {
+    if (index === 0) {
+      var toRemove = this.getNode(index);
+      this.first = toRemove.next;
+    } else {
+      var prev = this.getNode(index - 1);
+      var toRemove = prev.next;
+      prev.next = toRemove.next;
+    }
+    return toRemove.data;
+  }
+</code></pre>
+</div>
+<div><p>Complexiteit</p>
+</div>
+<div><p><img src="complexity.png" alt="complexity" style="width: 122%;"/></p>
+</div>
+<div><p>Queue</p>
+</div>
+<div><p><img src="Data_Queue.svg" alt="Queue" style="width: 160%;"/></p>
+</div>
+<div><pre><code class="lang-js">
+class Queue {
+  constructor() {
+    this.list = new SinglyLinkedList();
+  }
+
+  enqueue(data) {
+    this.list.append(data);
+  }
+
+  dequeue() {
+    return this.list.remove(0);
+  }
+}
+</code></pre>
+</div>
+<div><p>Stack</p>
+</div>
+<div><p><img src="Data_stack.svg" alt="Stack" style="width: 150%;"/></p>
+</div>
+<div><pre><code class="lang-js">
+class Stack {
+  constructor() {
+    this.list = new SinglyLinkedList();
+  }
+
+  push(data) {
+    this.list.insert(data);
+  }
+
+  pop() {
+    return this.list.remove(0);
+  }
+}
+</code></pre>
+</div>
+<div><p><img src="Call_stack_layout.png" alt="Call stack" style="width: 200%;"/></p>
+</div>
+<div><p>Associative array</p>
+</div>
+<div><p>Hash table</p>
+</div>
+<div><p><img src="Hash_table.svg" alt="Hash table" style="width: 250%;"/></p>
+</div>
+<div><p>Complexity</p>
+<ul>
+<li>Search: O(1)</li>
+<li>Insert: O(1)</li>
+<li>Delete: O(1)</li>
+</ul>
+</div>
+<div><p>Collisies</p>
+</div>
+<div><p><img src="Hash_collision.svg" alt="Collision" style="width: 250%;"/></p>
+</div>
+<div><p>Collision resolution</p>
+<ul>
+<li>Separate chaining</li>
+<li>Open addressing:<ul>
+<li>linear/quadratic probing</li>
+<li>double hashing</li>
+</ul>
+</li>
+</ul>
+</div>
+<div><h3 id="hash-functies">Hash functies</h3>
+<pre><code class="lang-js">function crappyHash(value, size) {
+  return value.length % size;
+}
+
+
+function betterHash(value, size) {
+  var temp = 0;
+  for (var i = 0; i &lt; value.length; i++) {
+    temp += value.charCodeAt(i) ** (i + 1);
+  }
+  return temp % size;
+}
+</code></pre>
+</div>
+<div><h3 id="separate-chaining">Separate chaining</h3>
+<pre><code class="lang-js">class Entry {
+  constructor(key, value) {
+    this.key = key;
+    this.value = value;
+  }
+}
+
+class HashTable {
+  constructor() { }
+  set(key, value) { }
+  get(key) { }
+}
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class HashTable
+
+  constructor() {
+    this.size = 11;
+    // JS doesn&#39;t actually allocate array size though...
+    this.buckets = new Array(this.size);
+    // Init with empty lists
+    for (var i = 0; i &lt; this.buckets.length; i++) {
+      this.buckets[i] = [];
+    }
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class HashTable
+
+  set(key, value) {
+    var index = hashFunc(key, this.size);
+    var entries = this.buckets[index];
+    // Check if already added, if so, update the value
+    for (var i = 0; i &lt; entries.length; i++) {
+      if (entries[i].key === key) {
+        entries[i].value = value;
+        return;
+      }
+    }
+    // otherwise: create a new Entry
+    var entry = new Entry(key, value);
+    entries.push(entry);
+  }
+</code></pre>
+</div>
+<div><pre><code class="lang-js">//class HashTable
+
+  get(key) {
+    var index = hashFunc(key, this.size);
+    var entries = this.buckets[index];
+    for (var i = 0; i &lt; entries.length; i++) {
+      if (entries[i].key === key) {
+        return entries[i].value;
+      }
+    }
+    throw new Error(&quot;Unknown key.&quot;);
+  }
+</code></pre>
+</div>
+<div><p>DEMO TIME?</p>
+</div>
+</body>
+</html>
