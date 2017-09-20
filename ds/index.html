@@ -40,6 +40,7 @@
 <ul>
 <li><em>Array</em>: blok geheugen alloceren, vaste grootte</li>
 <li><em>Linked list</em>: dynamisch, kan groeien/kleiner worden</li>
+<li><em>Dynamische array</em>: een array die zichzelf kan schalen (Python, JS)</li>
 </ul>
 </div>
 <div><p>Linked list</p>
@@ -145,6 +146,18 @@
 </div>
 <div><p><img src="complexity.png" alt="complexity" style="width: 122%;"/></p>
 </div>
+<div><p>Use cases:</p>
+<ul>
+<li>Efficient andere datastructuren implementeren (hash table, queue)</li>
+<li>Veel (random) insert/delete operaties (in het midden bijv)</li>
+<li>Weinig opzoekoperaties</li>
+<li>Aantal elementen vooraf onbekend</li>
+<li>Functionele programmeertalen</li>
+<li>Browser cache (back/forward button)</li>
+<li>Undo button</li>
+<li>etc.</li>
+</ul>
+</div>
 <div><p>Queue</p>
 </div>
 <div><p><img src="Data_Queue.svg" alt="Queue" style="width: 160%;"/></p>
@@ -207,7 +220,7 @@ class Stack {
 <div><p>Collision resolution</p>
 <ul>
 <li>Separate chaining</li>
-<li>Open addressing:<ul>
+<li>Open addressing (Python <code>dict</code>):<ul>
 <li>linear/quadratic probing</li>
 <li>double hashing</li>
 </ul>

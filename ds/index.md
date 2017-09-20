@@ -35,6 +35,7 @@ List implementaties:
 
 - _Array_: blok geheugen alloceren, vaste grootte
 - _Linked list_: dynamisch, kan groeien/kleiner worden
+- _Dynamische array_: een array die zichzelf kan schalen (Python, JS)
 
 ---
 
@@ -177,6 +178,19 @@ Complexiteit
 
 ---
 
+Use cases:
+
+- Efficient andere datastructuren implementeren (hash table, queue)
+- Veel (random) insert/delete operaties (in het midden bijv)
+- Weinig opzoekoperaties
+- Aantal elementen vooraf onbekend
+- Functionele programmeertalen
+- Browser cache (back/forward button)
+- Undo button
+- etc.
+
+---
+
 Queue
 
 ---
@@ -269,7 +283,7 @@ Collisies
 Collision resolution
 
 - Separate chaining
-- Open addressing:
+- Open addressing (Python `dict`):
     - linear/quadratic probing
     - double hashing
 
